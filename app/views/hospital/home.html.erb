@@ -1,0 +1,86 @@
+<div class="container">
+    
+    <div class="row">
+
+          <div class="col-sm">
+            <center><h6> <u>PATIENT</u></h6></center>
+            <br>
+            <%= form_tag controller: "hospital", action: "create_patient", method: "post" do %>
+              <div class="form-group">
+                <%= text_field_tag :name, '', class: "form-control", placeholder: "Name" %>
+              </div>
+              <div class="form-group">
+                <%= text_field_tag :phone_number, "", class: "form-control", placeholder: "Phone Number" %>
+              </div>
+                <%= submit_tag "Submit", class: "btn btn-light" %>
+            <% end %>
+          </div>
+
+          <div class="col-sm">
+            <center><h6> <u>DOCTOR</u></h6></center>
+            <br>
+            <%= form_tag controller: "hospital", action: "create_doctor", method: "post" do %>
+              <div class="form-group">
+                <%= text_field_tag :name, "", class: "form-control", placeholder: "Name" %>
+              </div>
+              <div class="form-group">
+                <%= text_field_tag :phone_number, "", class: "form-control", placeholder: "Phone Number" %>
+              </div>
+              <div class="form-group">
+                <%= text_field_tag :specialization, "", class: "form-control", placeholder: "Specialization" %>
+              </div>
+                <%= submit_tag "Submit", class: "btn btn-light"  %>
+            <% end %>
+
+          </div>
+
+    </div><br>
+
+    <div class="row">
+
+      <div class="col-sm">
+        <center><h6> <u>APPOINTMENT</u></h6></center>
+        <br>
+        <%= form_tag controller: "hospital", action: "create_appointment", method: "post" do %>
+          <div class="form-group">
+               <%= select_tag :doctor_id, options_for_select(@doctors.collect{ |doctor| [doctor["name"], doctor["id"]] }), include_blank: "Doctor Name", class: "form form-group form-control" %>
+          </div>
+          <div class="form-group">
+               <%= select_tag :patient_id, options_for_select(@patients.collect{ |patient| [patient["name"], patient["id"]] }), include_blank: "Patient Name", class: "form form-group form-control" %>
+          </div>
+          <div class="form-group">
+               <%= text_field_tag :diseases, "", class: "form-control", placeholder: "Diseases" %>
+          </div>
+               <%= submit_tag "Submit", class: "btn btn-light"  %>
+        <% end %><br/>
+      </div>
+
+      <div class="col-sm">
+           <center><h6> <u>VIEW APPOINTMENT </u></h6></center>
+           <table class="table table-bordered">
+               <thead>
+                    <tr>
+                      <th scope="col">Doctor Name</th>
+                      <th scope="col">Patient Name</th>
+                      <th scope="col">Diseases</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <% @appointments.each do |appointment| %>
+                    <tr>
+                      <td><%= appointment["appointment"]["doctor_name"] %></td>
+                      <td><%= appointment["appointment"]["patient_name"] %></td>
+                      <td><%= appointment["appointment"]["diseases"] %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+          </table><br/>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
