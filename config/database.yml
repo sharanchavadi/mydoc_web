@@ -23,5 +23,5 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: api_hospital
+  database: hospital_api
   pool: 5
